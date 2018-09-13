@@ -2,6 +2,7 @@ import * as express from 'express';
 import * as morgan from 'morgan';
 import * as bodyParser from 'body-parser';
 import DataBase from './config/db';
+import UserRoutes from './modules/user/routes';
 
 class App {
     public app: express.Application;
@@ -34,6 +35,11 @@ class App {
     routes() {
         this.app.route('/').get((req, res) => res.status(200).json({'message': 'Hello, world!'}));
         this.app.route('/test').get((req, res) => res.status(200).json({ 'message': 'Rota /test está funcionando' }));
+        this.app.route('/api/v1/users').get(UserRoutes.getAll);
+        this.app.route('/api/v1/users/:id').get(UserRoutes.getById);
+        this.app.route('/api/v1/users').post(UserRoutes.create);
+        this.app.route('/api/v1/users/:id').put(UserRoutes.update);
+        this.app.route('/api/v1/users').delete(UserRoutes.delete);
     }
 };
 
