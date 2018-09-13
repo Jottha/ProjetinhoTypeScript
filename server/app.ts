@@ -21,6 +21,7 @@ class App {
 
     routes() {
         this.app.route('/').get((req, res) => res.status(200).json({'message': 'Hello, world!'}));
+        this.app.route('/test').get((req, res) => res.status(200).json({ 'message': 'Rota /test está funcionando' }));
     }
 };
 
